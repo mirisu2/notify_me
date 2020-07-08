@@ -1,0 +1,29 @@
+```
+# vim /lib/systemd/system/redis_listener.service
+# systemctl daemon-reload
+# systemctl enable redis_listener.service
+# systemctl start redis_listener.service
+# systemctl status redis_listener.service
+[Unit]
+Description=Telegram bot (Notify service)
+After=multi-user.target
+After=network.target
+After=redis.service
+Requires=redis.service
+Conflicts=getty@tty1.service
+
+[Service]
+Type=simple
+User=root
+Group=root
+Restart=always
+WorkingDirectory=/root/scripts/
+ExecStart=/root/scripts/redis_listener.py
+StandardInput=tty-force
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=redis_listener
+
+[Install]
+WantedBy=multi-user.target
+```
