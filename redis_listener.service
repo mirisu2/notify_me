@@ -1,4 +1,3 @@
-```
 # vim /lib/systemd/system/redis_listener.service
 # systemctl daemon-reload
 # systemctl enable redis_listener.service
@@ -26,4 +25,3 @@ SyslogIdentifier=redis_listener
 
 [Install]
 WantedBy=multi-user.target
-```
