@@ -1,4 +1,3 @@
-import logging
 from os import environ
 
 from flask import Flask, request
@@ -15,12 +14,6 @@ app.config['ALLOWED_TOKENS'] = environ.get('ALLOWED_TOKENS')
 app.config['CHANNEL'] = environ.get('CHANNEL')
 redis_client = FlaskRedis(app)
 
-logger = logging.getLogger('__notify__')
-ch_console = logging.StreamHandler()
-ch_console.setLevel(logging.DEBUG)
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s: %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
-ch_console.setFormatter(formatter)
-logger.addHandler(ch_console)
 
 limiter = Limiter(
     app,
@@ -29,7 +22,6 @@ limiter = Limiter(
     headers_enabled=True,
     strategy='fixed-window-elastic-expiry'
 )
-limiter.logger.addHandler(ch_console)
 
 
 @limiter.request_filter

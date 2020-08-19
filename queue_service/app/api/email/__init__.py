@@ -20,7 +20,6 @@ def email():
     i = request.get_json()
     try:
         data = i['type'] + '1#2#3' + i['address'] + '1#2#3' + i['message']
-        print(data)
     except KeyError as e:
         print(e)
         return 'KeyError', 404
