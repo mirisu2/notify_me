@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  redis:
+    image: redis:alpine
+    command: redis-server --requirepass Yei9eanahuud4aip
+  queue_service:
+    build: queue_service/
+    image: queue_service:latest
+    env_file:
+      - ./configs/queue_service.env.list
+    links:
+      - "redis"
+    ports:
+      - "5252:80"
+    depends_on:
+      - redis

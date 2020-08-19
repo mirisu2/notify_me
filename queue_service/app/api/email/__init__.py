@@ -20,12 +20,16 @@ def email():
     i = request.get_json()
     try:
         data = i['type'] + '1#2#3' + i['address'] + '1#2#3' + i['message']
+        print(data)
     except KeyError as e:
         print(e)
         return 'KeyError', 404
     try:
-        redis_client.publish(app.config['CHANNEL'], data)
+        redis_client.publish(app.config['CHANNEL'], str(data))
         return "OK", 200
     except redis.exceptions.ConnectionError as e:
         print(e)
-        return 'Something went wrong', 404
+        return 'ConnectionError', 404
+    except redis.exceptions.DataError as e:
+        print(e)
+        return 'DataError', 404

@@ -37,7 +37,8 @@ def ip_whitelist():
     return request.remote_addr == "127.0.0.1"
 
 
-from app.api import email, telegram
+from app.api import email
+from app.api import telegram
 
 
 limiter.limit("10 per second")(email.bp)
