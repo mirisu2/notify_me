@@ -1,26 +1,33 @@
 # notify_me
+
+#### To start service:
 ```
-# To start service:
 docker-compose up -d --build
-
-# To stop service:
+```
+#### To stop service:
+```
 docker-compose down
+```
 
-
-API check health:
+#### API check health:
+```
 REQUEST:  http://domain.local:5252/ping
 RESPONSE: PONG
-
-API url:
+```
+#### API url:
+```
 http://domain.local:5252/api/email
 http://domain.local:5252/api/telegram
-
-HEADER:
+```
+#### HEADER:
+```
 {
   'Content-Type': 'application/json',
   'X-NOTIFY-API-Key': '55585dcbd7'
 }
-BODY:
+```
+#### BODY:
+```
 {
   'type': 'email',
   'address': 'who@mail.ru',
