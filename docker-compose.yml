@@ -1,8 +1,11 @@
 version: "3.8"
+
 services:
+
   redis:
     image: redis:alpine
     command: redis-server --requirepass Yei9eanahuud4aip
+
   queue_service:
     build: queue_service/
     image: queue_service:latest
@@ -14,3 +17,15 @@ services:
       - "5252:80"
     depends_on:
       - redis
+
+  send_notification:
+    build: send_notification/
+    image: send_notification:latest
+    env_file:
+      - ./configs/send_notification.env.list
+    links:
+      - "redis"
+    depends_on:
+      - redis
+
+

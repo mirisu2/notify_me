@@ -3,4 +3,5 @@ __pycache__/
 venv/
 .idea/
 .git/
-configs/
+configs/*.list
+configs/*.yml
