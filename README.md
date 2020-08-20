@@ -5,7 +5,7 @@ docker-compose up -d --build
 
 # To stop service:
 docker-compose down
-```
+
 
 API check health:
 REQUEST:  http://domain.local:5252/ping
@@ -22,13 +22,14 @@ HEADER:
 }
 BODY:
 {
-	"type": "email",
-	"address": "who@mail.ru",
-	"message": "I'm from INSOMNIA"
+  'type': 'email',
+  'address': 'who@mail.ru',
+  'message': "I am from INSOMNIA'
 }
 OR
 {
-	"type": "telegram",
-	"address": "34795934857",
-	"message": "I'm from INSOMNIA"
+  'type': 'telegram',
+  'address': "34795934857',
+  'message': 'I am from INSOMNIA'
 }
+```
