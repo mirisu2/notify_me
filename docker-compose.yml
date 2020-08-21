@@ -9,6 +9,7 @@ services:
   queue_service:
     build: queue_service/
     image: queue_service:latest
+    restart: always
     env_file:
       - ./configs/queue_service.env.list
     links:
@@ -21,6 +22,7 @@ services:
   send_notification:
     build: send_notification/
     image: send_notification:latest
+    restart: always
     env_file:
       - ./configs/send_notification.env.list
     links:
