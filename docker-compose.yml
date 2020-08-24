@@ -5,12 +5,28 @@ services:
   redis:
     image: redis:alpine
     command: redis-server --requirepass Yei9eanahuud4aip
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 100M
+        reservations:
+          cpus: '0.25'
+          memory: 20M
 
   queue_service:
     container_name: queue_service
     build: queue_service/
     image: queue_service:latest
     restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 200M
+        reservations:
+          cpus: '0.25'
+          memory: 100M
     env_file:
       - ./configs/queue_service.env.list
     links:
@@ -19,12 +35,26 @@ services:
       - "5252:80"
     depends_on:
       - redis
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5252/ping"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
 
   send_notification:
     container_name: send_notification
     build: send_notification/
     image: send_notification:latest
     restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 200M
+        reservations:
+          cpus: '0.25'
+          memory: 100M
     env_file:
       - ./configs/send_notification.env.list
     links:
