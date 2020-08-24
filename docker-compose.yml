@@ -7,6 +7,7 @@ services:
     command: redis-server --requirepass Yei9eanahuud4aip
 
   queue_service:
+    container_name: queue_service
     build: queue_service/
     image: queue_service:latest
     restart: always
@@ -20,6 +21,7 @@ services:
       - redis
 
   send_notification:
+    container_name: send_notification
     build: send_notification/
     image: send_notification:latest
     restart: always
